@@ -26,9 +26,8 @@ const sideVariants = {
   },
 };
 
-const mobileNav = ({ links }) => {
+const MobileNav = ({ links }) => {
   const [open, cycleOpen] = useCycle(false, true);
-  console.log(links);
   return (
     <>
       <AnimatePresence>
@@ -87,7 +86,7 @@ const mobileNav = ({ links }) => {
   );
 };
 
-export default mobileNav;
+export default MobileNav;
 
 const Aside = styled(motion.div)`
   background-color: ${({ theme }) => theme.bg.background};
