@@ -24,6 +24,9 @@ import UpdateModal from "../../../components/Admin/Product/UpdateModal";
 import DeleteModal from "../../../components/Admin/Product/DeleteModal";
 
 const Product = ({ token, role }) => {
+  if (process.browser) {
+    new Swiper(".swiper-logos");
+  }
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { productDetails, loading } = useSelector(

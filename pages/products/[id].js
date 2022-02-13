@@ -21,6 +21,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 const Product = () => {
+  if (process.browser) {
+    new Swiper(".swiper-logos");
+  }
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { productDetails, loading } = useSelector(

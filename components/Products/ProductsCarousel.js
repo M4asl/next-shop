@@ -17,6 +17,10 @@ import { IconContext } from "react-icons/lib";
 SwiperCore.use([Autoplay, FreeMode]);
 
 const ProductsCarousel = ({ title, productsData }) => {
+  if (process.browser) {
+    new Swiper(".swiper-logos");
+  }
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
