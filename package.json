@@ -37,7 +37,7 @@
     "redux-thunk": "^2.4.0",
     "styled-components": "^5.3.3",
     "styled-normalize": "^8.0.7",
-    "swiper": "^7.4.1",
+    "swiper": "6.0.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {
