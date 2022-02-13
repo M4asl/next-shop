@@ -17,6 +17,8 @@ import { IconContext } from "react-icons/lib";
 SwiperCore.use([Autoplay, FreeMode]);
 
 const ProductsCarousel = ({ title, productsData }) => {
+  // it have on deploy but it have to comment on dev mode
+
   if (process.browser) {
     new Swiper(".swiper-logos");
   }

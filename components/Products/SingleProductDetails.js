@@ -20,6 +20,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 const SingleProductDetails = () => {
+  // it have on deploy but it have to comment on dev mode
+
   if (process.browser) {
     new Swiper(".swiper-logos");
   }
@@ -45,6 +47,7 @@ const SingleProductDetails = () => {
   return (
     <>
       <ProductDetailsWrapper>
+        {loading && "Loading"}
         <ProductDetailsTopWrapper>
           <ImagesWrapper>
             <Swiper

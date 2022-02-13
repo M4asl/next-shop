@@ -30,6 +30,7 @@ const slides = [
 ];
 
 const Slider = () => {
+  // it have on deploy but it have to comment on dev mode
   if (process.browser) {
     new Swiper(".swiper-logos");
   }
