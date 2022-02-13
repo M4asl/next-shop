@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { addToCart } from "../../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { parseCookies } from "nookies";
+import { IconContext } from "react-icons/lib";
 
 // Import Swiper styles
 import "swiper/css";
@@ -97,7 +98,10 @@ const Product = ({ token, role }) => {
             <CenterContainer>
               <ProductPrice>{price}$</ProductPrice>
               <Button onClick={() => addToCartHandler(_id)}>
-                Add to cart <BsCartPlus />
+                Add to cart
+                <IconContext.Provider>
+                  <BsCartPlus />
+                </IconContext.Provider>
               </Button>
             </CenterContainer>
             {token && role === "admin" && (

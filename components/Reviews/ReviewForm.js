@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReviewProduct } from "../../redux/actions/productActions";
 import { toast } from "react-toastify";
 import { clearErrors } from "../../redux/actions/globalActions";
+import { IconContext } from "react-icons/lib";
 
 const ReviewForm = () => {
   const router = useRouter();
@@ -83,7 +84,10 @@ const ReviewForm = () => {
             <option value="5">5 - Excellent</option>
           </Select>
           <Button>
-            Add review <MdOutlineRateReview style={{ marginLeft: "5px" }} />
+            Add review
+            <IconContext.Provider>
+              <MdOutlineRateReview style={{ marginLeft: "5px" }} />
+            </IconContext.Provider>
           </Button>
         </FormGroup>
       </Form>

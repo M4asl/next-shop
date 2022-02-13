@@ -3,6 +3,7 @@ import Rating from "./Rating";
 import styled from "styled-components";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import Moment from "react-moment";
+import { IconContext } from "react-icons/lib";
 
 const ReviewList = ({ review }) => {
   return (
@@ -10,7 +11,9 @@ const ReviewList = ({ review }) => {
       <ReviewContainer>
         <LeftContainer>
           <Avatar>
-            <HiOutlineUserCircle />
+            <IconContext.Provider>
+              <HiOutlineUserCircle />
+            </IconContext.Provider>
           </Avatar>
           <ProfileName>Name</ProfileName>
         </LeftContainer>

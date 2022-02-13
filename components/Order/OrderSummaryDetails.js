@@ -5,6 +5,7 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
 import OrderProductList from "./OrderProductList";
+import { IconContext } from "react-icons/lib";
 
 const OrderDetails = ({ orderData, cartItems, cartDetails }) => {
   const [email, setEmail] = useState(
@@ -125,11 +126,16 @@ const OrderDetails = ({ orderData, cartItems, cartDetails }) => {
                 />
               </CartEmptyImageWrapper>
               <TextLink>
-                <AiOutlineArrowLeft />
+                <IconContext.Provider>
+                  <AiOutlineArrowLeft />
+                </IconContext.Provider>
+
                 <Link href="/products" passHref>
                   Back to products
                 </Link>
-                <BsFillCartCheckFill />
+                <IconContext.Provider>
+                  <BsFillCartCheckFill />
+                </IconContext.Provider>
               </TextLink>
             </CartEmptyWrapper>
           </>

@@ -9,6 +9,7 @@ import Reviews from "../../components/Reviews/ReviewList";
 import { toast } from "react-toastify";
 import { addToCart } from "../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
+import { IconContext } from "react-icons/lib";
 
 // Import Swiper styles
 import "swiper/css";
@@ -94,7 +95,10 @@ const Product = () => {
             <CenterContainer>
               <ProductPrice>{price}$</ProductPrice>
               <Button onClick={() => addToCartHandler(_id)}>
-                Add to cart <BsCartPlus />
+                Add to cart
+                <IconContext.Provider>
+                  <BsCartPlus />
+                </IconContext.Provider>
               </Button>
             </CenterContainer>
           </InfoWrapper>

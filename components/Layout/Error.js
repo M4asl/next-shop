@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const Error = ({ children }) => {
   return (
@@ -21,11 +22,15 @@ const Error = ({ children }) => {
       </ImageWrapper>
 
       <TextLink>
-        <AiOutlineArrowLeft />
+        <IconContext.Provider>
+          <AiOutlineArrowLeft />
+        </IconContext.Provider>
         <Link href="/products" passHref>
           Back to products
         </Link>
-        <BsFillCartCheckFill />
+        <IconContext.Provider>
+          <BsFillCartCheckFill />
+        </IconContext.Provider>
       </TextLink>
     </ErrorWrapper>
   );

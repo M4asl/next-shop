@@ -8,6 +8,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { clearErrors } from "../../redux/actions/globalActions";
+import { IconContext } from "react-icons/lib";
 
 const FilterProducts = () => {
   const { categories } = useSelector((state) => state.productsCategories);
@@ -135,7 +136,9 @@ const FilterProducts = () => {
         <ButtonContainer>
           <ButtonClear onClick={clearFilters}>
             <Link href="/products">CLEAR ALL</Link>
-            <AiOutlineClear />
+            <IconContext.Provider>
+              <AiOutlineClear />
+            </IconContext.Provider>
           </ButtonClear>
           <ButtonSearch type="submit">ADD FILTERS</ButtonSearch>
         </ButtonContainer>

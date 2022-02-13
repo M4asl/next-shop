@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import SearchDropDown from "./SerchDropDown";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const Search = () => {
   const ref = useRef();
@@ -29,7 +30,9 @@ const Search = () => {
   return (
     <SearchWrapper ref={ref} onClick={() => setShow(true)}>
       <span>Search Products</span>
-      <AiOutlineSearch style={{ marginLeft: "5px", fontSize: "2rem" }} />
+      <IconContext.Provider>
+        <AiOutlineSearch style={{ marginLeft: "5px", fontSize: "2rem" }} />
+      </IconContext.Provider>
       <SearchDropDown
         show={show}
         searchRef={searchRef}

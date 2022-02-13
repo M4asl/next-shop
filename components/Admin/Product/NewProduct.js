@@ -7,6 +7,7 @@ import { lightTheme } from "../../../styles/default";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const NewProduct = () => {
   const [name, setName] = useState("");
@@ -198,7 +199,9 @@ const NewProduct = () => {
               className="image"
             />
             <DeleteImageIcon onClick={() => deleteImage(i)}>
-              <AiOutlineCloseCircle />
+              <IconContext.Provider>
+                <AiOutlineCloseCircle />
+              </IconContext.Provider>
             </DeleteImageIcon>
           </div>
         ))}

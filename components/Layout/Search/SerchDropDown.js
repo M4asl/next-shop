@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { lightTheme } from "../../../styles/default";
 import { AiOutlineSearch } from "react-icons/ai";
-import { IconContext } from "react-icons";
+import { IconContext } from "react-icons/lib";
 import { useRouter } from "next/dist/client/router";
 import { useSelector } from "react-redux";
 

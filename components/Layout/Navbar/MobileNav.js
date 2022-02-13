@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import styled from "styled-components";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const itemVariants = {
   closed: {
@@ -68,17 +69,17 @@ const MobileNav = ({ links }) => {
       <BtnContainer>
         <Button onClick={cycleOpen}>
           {open ? (
-            <AiOutlineClose
-              style={{
-                fontSize: "2rem",
-              }}
-            />
+            <IconContext.Provider>
+              <AiOutlineClose
+                style={{
+                  fontSize: "2rem",
+                }}
+              />
+            </IconContext.Provider>
           ) : (
-            <AiOutlineMenu
-              style={{
-                fontSize: "2rem",
-              }}
-            />
+            <IconContext.Provider>
+              <AiOutlineMenu style={{ fontSize: "2rem" }} />
+            </IconContext.Provider>
           )}
         </Button>
       </BtnContainer>

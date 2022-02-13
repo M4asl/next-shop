@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { BsTrash } from "react-icons/bs";
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
+import { IconContext } from "react-icons/lib";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -92,7 +93,9 @@ const Cart = () => {
                 <ButtonRemove
                   onClick={() => removeFromCartHandler(item.product)}
                 >
-                  <BsTrash />
+                  <IconContext.Provider>
+                    <BsTrash />
+                  </IconContext.Provider>
                 </ButtonRemove>
               </CartProductWrapper>
             </>
@@ -112,11 +115,16 @@ const Cart = () => {
                 />
               </CartEmptyImageWrapper>
               <TextLink>
-                <AiOutlineArrowLeft />
+                <IconContext.Provider>
+                  <AiOutlineArrowLeft />
+                </IconContext.Provider>
+
                 <Link href="/products" passHref>
                   Back to products
                 </Link>
-                <BsFillCartCheckFill />
+                <IconContext.Provider>
+                  <BsFillCartCheckFill />
+                </IconContext.Provider>
               </TextLink>
             </CartEmptyWrapper>
           </>

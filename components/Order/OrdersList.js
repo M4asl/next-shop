@@ -5,6 +5,7 @@ import Link from "next/link";
 import OrderProductList from "../../components/Order/OrderProductList";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
+import { IconContext } from "react-icons/lib";
 
 const OrdersList = ({ orders, roleType }) => {
   const [selected, setSelected] = useState(null);
@@ -42,9 +43,13 @@ const OrdersList = ({ orders, roleType }) => {
                 <OrderNamePrice>Total price:</OrderNamePrice> {item.totalPrice}$
               </OrderTotalPrice>
               {selected === item._id ? (
-                <AiOutlineMinus style={{ fontSize: "2.5rem" }} />
+                <IconContext.Provider>
+                  <AiOutlineMinus style={{ fontSize: "2.5rem" }} />
+                </IconContext.Provider>
               ) : (
-                <AiOutlinePlus style={{ fontSize: "2.5rem" }} />
+                <IconContext.Provider>
+                  <AiOutlinePlus style={{ fontSize: "2.5rem" }} />
+                </IconContext.Provider>
               )}
             </OrderPriceContainer>
           </OrderTopContainer>

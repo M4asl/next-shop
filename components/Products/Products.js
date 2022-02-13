@@ -12,6 +12,7 @@ import Error from "../../components/Layout/Error";
 import { addToCart } from "../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { IconContext } from "react-icons/lib";
 
 const Products = ({ role }) => {
   const router = useRouter();
@@ -108,7 +109,10 @@ const Products = ({ role }) => {
               <BottomContainer>
                 <ProductPrice>{product.price}$</ProductPrice>
                 <Button onClick={() => addToCartHandler(product._id)}>
-                  Add to cart <BsCartPlus />
+                  Add to cart
+                  <IconContext.Provider>
+                    <BsCartPlus />
+                  </IconContext.Provider>
                 </Button>
               </BottomContainer>
             </Product>

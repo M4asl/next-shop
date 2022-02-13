@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
 import { toast } from "react-toastify";
+import { IconContext } from "react-icons/lib";
 
 SwiperCore.use([Autoplay, FreeMode]);
 
@@ -70,7 +71,10 @@ const ProductsCarousel = ({ title, productsData }) => {
                   <PriceContainer>{product.price}$</PriceContainer>
 
                   <Button onClick={() => addToCartHandler(product._id)}>
-                    Add to cart <BsCartPlus />
+                    Add to cart
+                    <IconContext.Provider>
+                      <BsCartPlus />
+                    </IconContext.Provider>
                   </Button>
                 </BottomContainer>
               </SlideContainer>

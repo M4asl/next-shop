@@ -10,6 +10,7 @@ import {
   updateProduct,
   getProductDetails,
 } from "../../../redux/actions/productActions";
+import { IconContext } from "react-icons/lib";
 
 const UpdateProduct = ({ closeModalUpdate }) => {
   const {
@@ -134,7 +135,9 @@ const UpdateProduct = ({ closeModalUpdate }) => {
             position: "absolute",
           }}
         >
-          <AiOutlineClose />
+          <IconContext.Provider>
+            <AiOutlineClose />
+          </IconContext.Provider>
         </div>
         <FormGroup>
           <Label htmlFor="name_field">Name</Label>
@@ -226,7 +229,9 @@ const UpdateProduct = ({ closeModalUpdate }) => {
                 onClick={() => deleteImage(i)}
               />
               <DeleteImageIcon onClick={() => deleteImage(i)}>
-                <AiOutlineCloseCircle />
+                <IconContext.Provider>
+                  <AiOutlineCloseCircle />
+                </IconContext.Provider>
               </DeleteImageIcon>
             </ImageWrapper>
           ))}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import OrderSummaryDetails from "./OrderSummaryDetails";
 import styled from "styled-components";
-
+import { IconContext } from "react-icons/lib";
 const OrderDetails = ({ orderData, roleType }) => {
   const [order, setOrder] = useState(orderData);
   const [role, setRole] = useState(roleType);
@@ -26,7 +26,10 @@ const OrderDetails = ({ orderData, roleType }) => {
       <OrderWrapper>
         <PlaceOrderTop>
           <Button>
-            <AiOutlineArrowLeft style={{ color: "white" }} />
+            <IconContext.Provider>
+              <AiOutlineArrowLeft style={{ color: "white" }} />
+            </IconContext.Provider>
+
             <Link href={role === "admin" ? `/admin/orders` : `/orders/my`}>
               Back to orders
             </Link>

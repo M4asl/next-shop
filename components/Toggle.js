@@ -2,6 +2,7 @@ import React from "react";
 import { func, string } from "prop-types";
 import styled from "styled-components";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { IconContext } from "react-icons/lib";
 
 const Button = styled.button`
   background: ${({ theme }) => theme.bg.background};
@@ -28,7 +29,17 @@ const Button = styled.button`
 `;
 
 const Toggle = ({ theme, toggleTheme }) => {
-  const icon = theme === "light" ? <FaMoon /> : <FaSun />;
+  const icon =
+    theme === "light" ? (
+      <IconContext.Provider>
+        <FaMoon />
+      </IconContext.Provider>
+    ) : (
+      <IconContext.Provider>
+        <FaSun />
+      </IconContext.Provider>
+    );
+
   return <Button onClick={toggleTheme}>{icon}</Button>;
 };
 Toggle.propTypes = {
