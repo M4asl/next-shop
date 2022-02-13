@@ -99,7 +99,7 @@ const Product = ({ token, role }) => {
               <ProductPrice>{price}$</ProductPrice>
               <Button onClick={() => addToCartHandler(_id)}>
                 Add to cart
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <BsCartPlus />
                 </IconContext.Provider>
               </Button>

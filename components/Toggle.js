@@ -31,11 +31,11 @@ const Button = styled.button`
 const Toggle = ({ theme, toggleTheme }) => {
   const icon =
     theme === "light" ? (
-      <IconContext.Provider>
+      <IconContext.Provider value={{ size: "20px" }}>
         <FaMoon />
       </IconContext.Provider>
     ) : (
-      <IconContext.Provider>
+      <IconContext.Provider value={{ size: "20px" }}>
         <FaSun />
       </IconContext.Provider>
     );

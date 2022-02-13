@@ -30,8 +30,8 @@ const Search = () => {
   return (
     <SearchWrapper ref={ref} onClick={() => setShow(true)}>
       <span>Search Products</span>
-      <IconContext.Provider>
-        <AiOutlineSearch style={{ marginLeft: "5px", fontSize: "2rem" }} />
+      <IconContext.Provider value={{ size: "20px" }}>
+        <AiOutlineSearch />
       </IconContext.Provider>
       <SearchDropDown
         show={show}

@@ -135,7 +135,7 @@ const UpdateProduct = ({ closeModalUpdate }) => {
             position: "absolute",
           }}
         >
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <AiOutlineClose />
           </IconContext.Provider>
         </div>
@@ -229,7 +229,7 @@ const UpdateProduct = ({ closeModalUpdate }) => {
                 onClick={() => deleteImage(i)}
               />
               <DeleteImageIcon onClick={() => deleteImage(i)}>
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <AiOutlineCloseCircle />
                 </IconContext.Provider>
               </DeleteImageIcon>

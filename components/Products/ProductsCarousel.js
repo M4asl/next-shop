@@ -72,7 +72,7 @@ const ProductsCarousel = ({ title, productsData }) => {
 
                   <Button onClick={() => addToCartHandler(product._id)}>
                     Add to cart
-                    <IconContext.Provider>
+                    <IconContext.Provider value={{ size: "20px" }}>
                       <BsCartPlus />
                     </IconContext.Provider>
                   </Button>

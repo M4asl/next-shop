@@ -136,7 +136,7 @@ const FilterProducts = () => {
         <ButtonContainer>
           <ButtonClear onClick={clearFilters}>
             <Link href="/products">CLEAR ALL</Link>
-            <IconContext.Provider>
+            <IconContext.Provider value={{ size: "20px" }}>
               <AiOutlineClear />
             </IconContext.Provider>
           </ButtonClear>

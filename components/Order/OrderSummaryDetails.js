@@ -126,14 +126,14 @@ const OrderDetails = ({ orderData, cartItems, cartDetails }) => {
                 />
               </CartEmptyImageWrapper>
               <TextLink>
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <AiOutlineArrowLeft />
                 </IconContext.Provider>
 
                 <Link href="/products" passHref>
                   Back to products
                 </Link>
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <BsFillCartCheckFill />
                 </IconContext.Provider>
               </TextLink>

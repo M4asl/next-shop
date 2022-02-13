@@ -69,16 +69,12 @@ const MobileNav = ({ links }) => {
       <BtnContainer>
         <Button onClick={cycleOpen}>
           {open ? (
-            <IconContext.Provider>
-              <AiOutlineClose
-                style={{
-                  fontSize: "2rem",
-                }}
-              />
+            <IconContext.Provider value={{ size: "20px" }}>
+              <AiOutlineClose />
             </IconContext.Provider>
           ) : (
-            <IconContext.Provider>
-              <AiOutlineMenu style={{ fontSize: "2rem" }} />
+            <IconContext.Provider value={{ size: "20px" }}>
+              <AiOutlineMenu />
             </IconContext.Provider>
           )}
         </Button>

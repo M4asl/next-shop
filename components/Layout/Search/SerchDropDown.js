@@ -51,13 +51,8 @@ const SerchDropDown = ({ closeDropdown, show, searchRef }) => {
                 type="submit"
                 style={{ background: "transparent", border: "none" }}
               >
-                <IconContext.Provider
-                  value={{ size: "2.5rem", color: "white" }}
-                >
-                  <AiOutlineSearch
-                    style={{ cursor: "pointer" }}
-                    onClick={() => closeDropdown()}
-                  />
+                <IconContext.Provider value={{ size: "20px" }}>
+                  <AiOutlineSearch onClick={() => closeDropdown()} />
                 </IconContext.Provider>
               </button>
             </SearchWrapper>

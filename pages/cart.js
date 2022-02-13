@@ -93,7 +93,7 @@ const Cart = () => {
                 <ButtonRemove
                   onClick={() => removeFromCartHandler(item.product)}
                 >
-                  <IconContext.Provider>
+                  <IconContext.Provider value={{ size: "20px" }}>
                     <BsTrash />
                   </IconContext.Provider>
                 </ButtonRemove>
@@ -115,14 +115,14 @@ const Cart = () => {
                 />
               </CartEmptyImageWrapper>
               <TextLink>
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <AiOutlineArrowLeft />
                 </IconContext.Provider>
 
                 <Link href="/products" passHref>
                   Back to products
                 </Link>
-                <IconContext.Provider>
+                <IconContext.Provider value={{ size: "20px" }}>
                   <BsFillCartCheckFill />
                 </IconContext.Provider>
               </TextLink>

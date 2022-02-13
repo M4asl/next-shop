@@ -7,75 +7,75 @@ const Rating = ({ value }) => {
     <div>
       <span>
         {value >= 1 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarFill />
           </IconContext.Provider>
         ) : value >= 0.5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarHalf />
           </IconContext.Provider>
         ) : (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStar />
           </IconContext.Provider>
         )}
       </span>
       <span>
         {value >= 2 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarFill />
           </IconContext.Provider>
         ) : value >= 1.5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarHalf />
           </IconContext.Provider>
         ) : (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStar />
           </IconContext.Provider>
         )}
       </span>
       <span>
         {value >= 3 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarFill />
           </IconContext.Provider>
         ) : value >= 2.5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarHalf />
           </IconContext.Provider>
         ) : (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStar />
           </IconContext.Provider>
         )}
       </span>
       <span>
         {value >= 4 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarFill />
           </IconContext.Provider>
         ) : value >= 3.5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarHalf />
           </IconContext.Provider>
         ) : (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStar />
           </IconContext.Provider>
         )}
       </span>
       <span>
         {value >= 5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarFill />
           </IconContext.Provider>
         ) : value >= 4.5 ? (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStarHalf />
           </IconContext.Provider>
         ) : (
-          <IconContext.Provider>
+          <IconContext.Provider value={{ size: "20px" }}>
             <BsStar />
           </IconContext.Provider>
         )}

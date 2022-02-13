@@ -26,7 +26,7 @@ const OrderDetails = ({ orderData, roleType }) => {
       <OrderWrapper>
         <PlaceOrderTop>
           <Button>
-            <IconContext.Provider>
+            <IconContext.Provider value={{ size: "20px" }}>
               <AiOutlineArrowLeft style={{ color: "white" }} />
             </IconContext.Provider>
 

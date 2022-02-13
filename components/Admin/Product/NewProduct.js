@@ -199,7 +199,7 @@ const NewProduct = () => {
               className="image"
             />
             <DeleteImageIcon onClick={() => deleteImage(i)}>
-              <IconContext.Provider>
+              <IconContext.Provider value={{ size: "20px" }}>
                 <AiOutlineCloseCircle />
               </IconContext.Provider>
             </DeleteImageIcon>

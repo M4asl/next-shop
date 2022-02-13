@@ -43,12 +43,12 @@ const OrdersList = ({ orders, roleType }) => {
                 <OrderNamePrice>Total price:</OrderNamePrice> {item.totalPrice}$
               </OrderTotalPrice>
               {selected === item._id ? (
-                <IconContext.Provider>
-                  <AiOutlineMinus style={{ fontSize: "2.5rem" }} />
+                <IconContext.Provider value={{ size: "20px" }}>
+                  <AiOutlineMinus />
                 </IconContext.Provider>
               ) : (
-                <IconContext.Provider>
-                  <AiOutlinePlus style={{ fontSize: "2.5rem" }} />
+                <IconContext.Provider value={{ size: "20px" }}>
+                  <AiOutlinePlus />
                 </IconContext.Provider>
               )}
             </OrderPriceContainer>
