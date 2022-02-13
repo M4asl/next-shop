@@ -85,7 +85,7 @@ const ReviewForm = () => {
           </Select>
           <Button>
             Add review
-            <IconContext.Provider>
+            <IconContext.Provider value={{ size: "20px" }}>
               <MdOutlineRateReview style={{ marginLeft: "5px" }} />
             </IconContext.Provider>
           </Button>
