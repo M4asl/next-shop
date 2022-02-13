@@ -1,8 +1,22 @@
 import React from "react";
-import { func, string } from "prop-types";
 import styled from "styled-components";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
+
+const Toggle = ({ theme, toggleTheme }) => {
+  const icon =
+    theme === "light" ? (
+      <IconContext.Provider value={{ size: "1em" }}>
+        <FaMoon />
+      </IconContext.Provider>
+    ) : (
+      <IconContext.Provider value={{ size: "1em" }}>
+        <FaSun />
+      </IconContext.Provider>
+    );
+
+  return <Button onClick={toggleTheme}>{icon}</Button>;
+};
 
 const Button = styled.button`
   background: ${({ theme }) => theme.bg.background};
@@ -28,22 +42,4 @@ const Button = styled.button`
   }
 `;
 
-const Toggle = ({ theme, toggleTheme }) => {
-  const icon =
-    theme === "light" ? (
-      <IconContext.Provider value={{ size: "20px" }}>
-        <FaMoon />
-      </IconContext.Provider>
-    ) : (
-      <IconContext.Provider value={{ size: "20px" }}>
-        <FaSun />
-      </IconContext.Provider>
-    );
-
-  return <Button onClick={toggleTheme}>{icon}</Button>;
-};
-Toggle.propTypes = {
-  theme: string.isRequired,
-  toggleTheme: func.isRequired,
-};
 export default Toggle;
