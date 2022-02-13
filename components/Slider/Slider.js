@@ -30,9 +30,9 @@ const slides = [
 ];
 
 const Slider = () => {
-  // if (process.browser) {
-  //   new Swiper(".swiper-logos");
-  // }
+  if (process.browser) {
+    new Swiper(".swiper-logos");
+  }
   return (
     <SliderContainer>
       <Swiper
