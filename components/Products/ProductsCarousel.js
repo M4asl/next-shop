@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import SwiperCore, { Autoplay, FreeMode } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import SwiperCore, { Autoplay, FreeMode } from "swiper";
 import { lightTheme } from "../../styles/default";
 import { BsCartPlus } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -14,14 +14,111 @@ import { addToCart } from "../../redux/actions/cartActions";
 import { toast } from "react-toastify";
 import { IconContext } from "react-icons/lib";
 
-SwiperCore.use([Autoplay, FreeMode]);
+// SwiperCore.use([Autoplay, FreeMode]);
 
-const ProductsCarousel = ({ title, productsData }) => {
-  // it have on deploy but it have to comment on dev mode
+// const ProductsCarousel = ({ title, productsData }) => {
+//   // it have on deploy but it have to comment on dev mode
 
-  if (process.browser) {
-    new Swiper(".swiper-logos");
-  }
+//   if (process.browser) {
+//     new Swiper(".swiper-logos");
+//   }
+
+// const dispatch = useDispatch();
+// const cart = useSelector((state) => state.cart);
+// const { cartItems } = cart;
+
+// const addToCartHandler = (id, qty = 1) => {
+//   if (cartItems.length > 12) {
+//     toast.error("Maximum cart size is 13 products.");
+//   }
+//   if (cartItems.length < 13) {
+//     dispatch(addToCart(id, qty));
+//     toast.success("The product has been added.");
+//   }
+// };
+
+//   return (
+//     <LatestProductsContainer>
+// <TitleText>{title}</TitleText>
+//       <SliderContainer>
+//         <Swiper
+//           slidesPerView={3}
+//           spaceBetween={30}
+//           freeMode={true}
+//           loop={true}
+//           style={{ height: "100%" }}
+//         >
+//           {productsData.map((product) => (
+//             <SwiperSlide key={product._id}>
+//               <SlideContainer>
+// <TopContainer>
+//   <ImageSlideContainer>
+//     <Image
+//       src={product.images[0].url}
+//       alt={product.name}
+//       blurDataURL={product.images[0].url}
+//       placeholder="blur"
+//       layout="fill"
+//     />
+//   </ImageSlideContainer>
+//   <InfoContainer>
+//     <HeaderProduct>
+//       <Link href={`/products/${product._id}`}>
+//         {product.name.substring(0, 30)}
+//       </Link>
+//       {product.name.length > 30 && "..."}
+//     </HeaderProduct>
+//     <DescriptionProduct>
+//       {product.description}
+//     </DescriptionProduct>
+//   </InfoContainer>
+// </TopContainer>
+// <BottomContainer>
+//   <PriceContainer>{product.price}$</PriceContainer>
+
+//   <Button onClick={() => addToCartHandler(product._id)}>
+//     Add to cart
+//     <IconContext.Provider value={{ size: "20px" }}>
+//       <BsCartPlus />
+//     </IconContext.Provider>
+//   </Button>
+// </BottomContainer>
+//               </SlideContainer>
+//             </SwiperSlide>
+//           ))}
+//         </Swiper>
+//       </SliderContainer>
+//     </LatestProductsContainer>
+//   );
+// };
+
+// export default ProductsCarousel;
+
+import React, { useState, useEffect, useCallback } from "react";
+import { PrevButton, NextButton } from "../Slider/SliderButtons";
+import useEmblaCarousel from "embla-carousel-react";
+
+const EmblaCarousel = ({ title, productsData }) => {
+  const [viewportRef, embla] = useEmblaCarousel({
+    dragFree: true,
+    containScroll: "trimSnaps",
+  });
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+
+  const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
+  const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
+  const onSelect = useCallback(() => {
+    if (!embla) return;
+    setPrevBtnEnabled(embla.canScrollPrev());
+    setNextBtnEnabled(embla.canScrollNext());
+  }, [embla]);
+
+  useEffect(() => {
+    if (!embla) return;
+    embla.on("select", onSelect);
+    onSelect();
+  }, [embla, onSelect]);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -38,19 +135,13 @@ const ProductsCarousel = ({ title, productsData }) => {
   };
 
   return (
-    <LatestProductsContainer>
+    <EmblaWrapper>
       <TitleText>{title}</TitleText>
-      <SliderContainer>
-        <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          freeMode={true}
-          loop={true}
-          style={{ height: "100%" }}
-        >
-          {productsData.map((product) => (
-            <SwiperSlide key={product._id}>
-              <SlideContainer>
+      <div className="embla__viewport" ref={viewportRef}>
+        <div className="embla__container">
+          {productsData.map((product, index) => (
+            <div className="embla__slide" key={index}>
+              <div className="embla__slide__inner">
                 <TopContainer>
                   <ImageSlideContainer>
                     <Image
@@ -83,16 +174,116 @@ const ProductsCarousel = ({ title, productsData }) => {
                     </IconContext.Provider>
                   </Button>
                 </BottomContainer>
-              </SlideContainer>
-            </SwiperSlide>
+              </div>
+            </div>
           ))}
-        </Swiper>
-      </SliderContainer>
-    </LatestProductsContainer>
+        </div>
+      </div>
+      <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+      <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+    </EmblaWrapper>
   );
 };
 
-export default ProductsCarousel;
+const EmblaWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  // background-color: #f7f7f7;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .embla__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .embla__viewport.is-draggable {
+    cursor: move;
+    cursor: grab;
+  }
+
+  .embla__viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .embla__container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    margin-left: -10px;
+  }
+
+  .embla__slide {
+    position: relative;
+    min-width: 600px;
+    height: 350px;
+    padding: 10px;
+    margin-right: 30px;
+    background-color: #e8e9eb;
+    border-radius: 20px;
+  }
+
+  .embla__slide__inner {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .embla__slide__img {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    min-height: 100%;
+    min-width: 100%;
+    max-width: none;
+    transform: translate(-50%, -50%);
+  }
+
+  .embla__button {
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    touch-action: manipulation;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    fill: #1bcacd;
+    padding: 0;
+  }
+
+  .embla__button:disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  .embla__button__svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .embla__button--prev {
+    left: 27px;
+  }
+
+  .embla__button--next {
+    right: 27px;
+  }
+`;
 
 const LatestProductsContainer = styled.div`
   width: 100%;
@@ -227,3 +418,5 @@ const Button = styled.button`
   background-color: white;
   border: 2px solid ${({ theme }) => theme.text.primary};
 `;
+
+export default EmblaCarousel;
