@@ -443,44 +443,52 @@ const responsive = {
   },
 };
 
-const Simple = ({ productsData }) => {
+const Simple = ({ title, productsData }) => {
   return (
-    <Carousel ssr partialVisbile itemClass="image-item" responsive={responsive}>
-      {productsData.map((product, index) => (
-        <SlideContainer key={index}>
-          <TopContainer>
-            <ImageSlideContainer>
-              <Image
-                src={product.images[0].url}
-                alt={product.name}
-                blurDataURL={product.images[0].url}
-                placeholder="blur"
-                layout="fill"
-              />
-            </ImageSlideContainer>
-            <InfoContainer>
-              <HeaderProduct>
-                <Link href={`/products/${product._id}`}>
-                  {product.name.substring(0, 30)}
-                </Link>
-                {product.name.length > 30 && "..."}
-              </HeaderProduct>
-              <DescriptionProduct>{product.description}</DescriptionProduct>
-            </InfoContainer>
-          </TopContainer>
-          <BottomContainer>
-            <PriceContainer>{product.price}$</PriceContainer>
+    <>
+      <TitleText>{title}</TitleText>
+      <Carousel
+        ssr
+        partialVisbile
+        itemClass="image-item"
+        responsive={responsive}
+      >
+        {productsData.map((product, index) => (
+          <SlideContainer key={index}>
+            <TopContainer>
+              <ImageSlideContainer>
+                <Image
+                  src={product.images[0].url}
+                  alt={product.name}
+                  blurDataURL={product.images[0].url}
+                  placeholder="blur"
+                  layout="fill"
+                />
+              </ImageSlideContainer>
+              <InfoContainer>
+                <HeaderProduct>
+                  <Link href={`/products/${product._id}`}>
+                    {product.name.substring(0, 30)}
+                  </Link>
+                  {product.name.length > 30 && "..."}
+                </HeaderProduct>
+                <DescriptionProduct>{product.description}</DescriptionProduct>
+              </InfoContainer>
+            </TopContainer>
+            <BottomContainer>
+              <PriceContainer>{product.price}$</PriceContainer>
 
-            <Button onClick={() => addToCartHandler(product._id)}>
-              Add to cart
-              <IconContext.Provider value={{ size: "20px" }}>
-                <BsCartPlus />
-              </IconContext.Provider>
-            </Button>
-          </BottomContainer>
-        </SlideContainer>
-      ))}
-    </Carousel>
+              <Button onClick={() => addToCartHandler(product._id)}>
+                Add to cart
+                <IconContext.Provider value={{ size: "20px" }}>
+                  <BsCartPlus />
+                </IconContext.Provider>
+              </Button>
+            </BottomContainer>
+          </SlideContainer>
+        ))}
+      </Carousel>
+    </>
   );
 };
 
@@ -529,7 +537,7 @@ const SliderContainer = styled.div`
 
 const SlideContainer = styled.div`
   width: 600px;
-  height: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
