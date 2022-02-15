@@ -10,7 +10,7 @@ import { wrapper } from "../redux/store";
 export default function Home() {
   return (
     <div>
-      <Slider />
+      {/* <Slider /> */}
       <LatestProducts />
       <TopRatingProducts />
     </div>

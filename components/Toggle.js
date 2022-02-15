@@ -4,18 +4,19 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 
 const Toggle = ({ theme, toggleTheme }) => {
-  const icon =
-    theme === "light" ? (
-      <IconContext.Provider value={{ size: "1em" }}>
-        <FaMoon />
-      </IconContext.Provider>
-    ) : (
-      <IconContext.Provider value={{ size: "1em" }}>
-        <FaSun />
-      </IconContext.Provider>
-    );
-
-  return <Button onClick={toggleTheme}>{icon}</Button>;
+  return (
+    <Button onClick={toggleTheme}>
+      {theme === "light" ? (
+        <IconContext.Provider value={{ size: "1em" }}>
+          <FaMoon />
+        </IconContext.Provider>
+      ) : (
+        <IconContext.Provider value={{ size: "1em" }}>
+          <FaSun />
+        </IconContext.Provider>
+      )}
+    </Button>
+  );
 };
 
 const Button = styled.button`
@@ -24,7 +25,7 @@ const Button = styled.button`
   color: ${({ theme }) => theme.text.primary};
   border-radius: 50%;
   cursor: pointer;
-  font-size: 2rem;
+  // font-size: 2rem;
   padding: 0.8rem;
   margin: 0.8rem;
   position: fixed;

@@ -1,8 +1,9 @@
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../styles/default";
 import Layout from "../components/Layout/main";
 import GlobalStyles from "../styles/globals";
-import Toggle from "../components/Toggle";
+const Toggle = dynamic(() => import("../components/Toggle"), { ssr: false });
 import { useDarkMode } from "../hooks/useDarkMode";
 import { wrapper } from "../redux/store";
 import { useDispatch } from "react-redux";

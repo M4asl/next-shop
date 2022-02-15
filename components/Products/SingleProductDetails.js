@@ -22,9 +22,9 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 const SingleProductDetails = () => {
   // it have on deploy but it have to comment on dev mode
 
-  if (process.browser) {
-    new Swiper(".swiper-logos");
-  }
+  // if (process.browser) {
+  //   new Swiper(".swiper-logos");
+  // }
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { productDetails, loading } = useSelector(
