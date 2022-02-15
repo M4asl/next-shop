@@ -426,29 +426,40 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+  xl: {
+    breakpoint: { max: 3000, min: 1280 },
     items: 3,
-    paritialVisibilityGutter: 60,
+    paritialVisibilityGutter: 0,
   },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
+  lg: {
+    breakpoint: { max: 1280, min: 1024 },
     items: 2,
-    paritialVisibilityGutter: 50,
+    paritialVisibilityGutter: 10,
   },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
+  md: {
+    breakpoint: { max: 1024, min: 768 },
+    items: 2,
+    paritialVisibilityGutter: 0,
+  },
+  sm: {
+    breakpoint: { max: 768, min: 480 },
     items: 1,
-    paritialVisibilityGutter: 30,
+    paritialVisibilityGutter: 100,
+  },
+  xs: {
+    breakpoint: { max: 480, min: 0 },
+    items: 1,
+    paritialVisibilityGutter: 10,
   },
 };
 
 const Simple = ({ title, productsData }) => {
   return (
-    <>
+    <Wrapper>
       <TitleText>{title}</TitleText>
       <Carousel
         ssr
+        // centerMode
         partialVisbile
         itemClass="image-item"
         responsive={responsive}
@@ -488,17 +499,20 @@ const Simple = ({ title, productsData }) => {
           </SlideContainer>
         ))}
       </Carousel>
-    </>
+    </Wrapper>
   );
 };
 
 export default Simple;
-const LatestProductsContainer = styled.div`
-  width: 100%;
-  overflow: hidden;
-  margin: 20px 0px;
-  display: flex;
-  flex-direction: column;
+
+const Wrapper = styled.div`
+  margin: 30px;
+  .image-item {
+    padding: 0 10px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    margin: 20px 0px;
+  }
 `;
 
 const TitleText = styled.h1`
@@ -512,31 +526,8 @@ const TitleText = styled.h1`
   }
 `;
 
-const SliderContainer = styled.div`
-  width: 2000px;
-  height: 350px;
-  margin: 0px auto;
-  @media only ${({ theme }) => theme.breakpoints.lg} {
-    width: 1500px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.lg} {
-    height: 300px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.md} {
-    height: 280px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.sm} {
-    width: 1200px;
-    height: 250px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.xs} {
-    width: 900px;
-    height: 200px;
-  }
-`;
-
 const SlideContainer = styled.div`
-  width: 600px;
+  width: 100%;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -545,17 +536,8 @@ const SlideContainer = styled.div`
   border-radius: 20px;
   color: ${lightTheme.text.primary};
   padding: 20px;
-  @media only ${({ theme }) => theme.breakpoints.lg} {
-    width: 500px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.md} {
-    width: 450px;
-  }
-  @media only ${({ theme }) => theme.breakpoints.sm} {
-    width: 400px;
-  }
   @media only ${({ theme }) => theme.breakpoints.xs} {
-    width: 300px;
+    height: 200px;
   }
 `;
 
@@ -566,7 +548,7 @@ const TopContainer = styled.div`
 `;
 
 const ImageSlideContainer = styled.div`
-  width: 50%;
+  width: 40%;
   height: 100%;
   position: relative;
   border-radius: 20px;
@@ -574,7 +556,7 @@ const ImageSlideContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  width: 50%;
+  width: 60%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -593,13 +575,10 @@ const HeaderProduct = styled.div`
 `;
 
 const DescriptionProduct = styled.div`
-  max-height: 70%;
+  max-height: 50%;
   overflow-y: scroll;
   text-align: end;
   padding-right: 10px;
-  @media only ${({ theme }) => theme.breakpoints.sm} {
-    display: none;
-  }
   @media only ${({ theme }) => theme.breakpoints.xs} {
     display: none;
   }

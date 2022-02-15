@@ -11,7 +11,7 @@ const ReviewList = ({ review }) => {
       <ReviewContainer>
         <LeftContainer>
           <Avatar>
-            <IconContext.Provider>
+            <IconContext.Provider value={{ size: "20px" }}>
               <HiOutlineUserCircle />
             </IconContext.Provider>
           </Avatar>

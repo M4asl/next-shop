@@ -199,7 +199,7 @@ const Simple = () => {
       ssr
       autoPlay
       infinite
-      autoPlaySpeed={2000}
+      autoPlaySpeed={3000}
       itemClass="image-item"
       responsive={responsive}
     >
@@ -211,7 +211,6 @@ const Simple = () => {
             blurDataURL={slide.image}
             placeholder="blur"
             layout="fill"
-            className={"image"}
           />
         </Wrapper>
       ))}
