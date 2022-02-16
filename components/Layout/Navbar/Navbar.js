@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../../redux/actions/userActions";
 import Search from "../Search/Search";
 import Menu from "./Menu";
+import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 const menuListItem = [
   {
@@ -26,7 +28,9 @@ const Navbar = () => {
   const isMobile = useMediaQuery("(max-width: 1024px)");
 
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.getCurrentUserDetails);
+  const { userInfo, loading } = useSelector(
+    (state) => state.getCurrentUserDetails
+  );
   const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
@@ -82,6 +86,11 @@ const Navbar = () => {
         </ul>
       </RightSideWrapper>
       {isMobile && <MobileNav links={menuListItem} />}
+      {loading && (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      )}
     </Navigation>
   );
 };
@@ -140,6 +149,14 @@ const Navigation = styled.nav`
     width: 100%;
     left: 0;
   }
+`;
+
+const LoaderWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
 `;
 
 const LeftSideWrapper = styled.div`

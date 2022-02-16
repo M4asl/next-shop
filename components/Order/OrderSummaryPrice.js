@@ -7,6 +7,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../redux/actions/orderActions";
 import { ORDER_PAY_RESET } from "../../redux/constants/orderConstants";
 import { toast } from "react-toastify";
+import Loader from "../Layout/Loader";
 
 const OrderSummaryPrice = ({
   itemsPriceNetto,
@@ -83,7 +84,7 @@ const OrderSummaryPrice = ({
       </OrderSummaryPriceListItem>
       {order && !order.isPaid && order.paymentMethod === "Paypal" && (
         <OrderSummaryPriceListItem>
-          {loadingPay && "Loading"}
+          {loadingPay && <Loader />}
           {!sdkReady ? (
             "Loading"
           ) : (

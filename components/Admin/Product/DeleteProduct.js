@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { deleteProduct } from "../../../redux/actions/productActions";
+import Loader from "../../Layout/Loader";
 
 const DeleteProduct = ({
   showModalDelete,
@@ -27,6 +28,9 @@ const DeleteProduct = ({
       toast.success(isDeleted.message);
       router.push("/admin/products");
     }
+    if ((error, productDetailsError)) {
+      toast.error(error || productDetailsError);
+    }
   }, [success, isDeleted]);
 
   const deleteProductHandler = () => {
@@ -42,6 +46,7 @@ const DeleteProduct = ({
           DELETE
         </DeleteButton>
       </ButtonContainer>
+      {(loading || productDetailsLoading) && <Loader />}
     </ModalWrapper>
   );
 };

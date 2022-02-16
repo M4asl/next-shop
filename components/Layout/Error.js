@@ -22,13 +22,13 @@ const Error = ({ children }) => {
       </ImageWrapper>
 
       <TextLink>
-        <IconContext.Provider>
+        <IconContext.Provider value={{ size: "40px" }}>
           <AiOutlineArrowLeft />
         </IconContext.Provider>
         <Link href="/products" passHref>
           Back to products
         </Link>
-        <IconContext.Provider>
+        <IconContext.Provider value={{ size: "40px" }}>
           <BsFillCartCheckFill />
         </IconContext.Provider>
       </TextLink>

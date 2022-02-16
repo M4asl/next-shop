@@ -1,6 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
-import Router from "next/router";
 
 import {
   USER_DETAILS_FAIL,
@@ -12,7 +10,7 @@ const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
 
-    const { data } = await axios.get("/api/auth/me");
+    const { data } = await axios.get(`/api/auth/me`);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -21,7 +19,7 @@ const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload: error.response.data.message,
+      payload: error,
     });
   }
 };

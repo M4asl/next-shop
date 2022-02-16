@@ -6,12 +6,16 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 import { useRouter } from "next/dist/client/router";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 const SerchDropDown = ({ closeDropdown, show, searchRef }) => {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const { userInfo } = useSelector((state) => state.getCurrentUserDetails);
+  const { userInfo, loading } = useSelector(
+    (state) => state.getCurrentUserDetails
+  );
   useEffect(() => {
     if (!show) {
       setSearch("");
@@ -22,7 +26,7 @@ const SerchDropDown = ({ closeDropdown, show, searchRef }) => {
     e.preventDefault();
 
     let link =
-      userInfo.role === "admin"
+      userInfo?.role === "admin"
         ? `/admin/products/?page=${page}`
         : `/products/?page=${page}`;
 
@@ -32,34 +36,41 @@ const SerchDropDown = ({ closeDropdown, show, searchRef }) => {
   };
 
   return (
-    <AnimatePresence>
-      {show && (
-        <SearchContainer
-          initial={{ opacity: 0, height: "0%" }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0 }}
-          transition={{ type: "spring", duration: 1 }}
-        >
-          <Form onSubmit={submitHandler}>
-            <SearchWrapper ref={searchRef}>
-              <Input
-                value={search}
-                placeholder="Search"
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button
-                type="submit"
-                style={{ background: "transparent", border: "none" }}
-              >
-                <IconContext.Provider value={{ size: "20px" }}>
-                  <AiOutlineSearch onClick={() => closeDropdown()} />
-                </IconContext.Provider>
-              </button>
-            </SearchWrapper>
-          </Form>
-        </SearchContainer>
+    <>
+      <AnimatePresence>
+        {show && (
+          <SearchContainer
+            initial={{ opacity: 0, height: "0%" }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0 }}
+            transition={{ type: "spring", duration: 1 }}
+          >
+            <Form onSubmit={submitHandler}>
+              <SearchWrapper ref={searchRef}>
+                <Input
+                  value={search}
+                  placeholder="Search"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  style={{ background: "transparent", border: "none" }}
+                >
+                  <IconContext.Provider value={{ size: "20px" }}>
+                    <AiOutlineSearch onClick={() => closeDropdown()} />
+                  </IconContext.Provider>
+                </button>
+              </SearchWrapper>
+            </Form>
+          </SearchContainer>
+        )}
+      </AnimatePresence>
+      {loading && (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
@@ -69,6 +80,14 @@ const SearchContainer = styled(motion.div)`
   width: 300px;
   position: absolute;
   top: 100%;
+`;
+
+const LoaderWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
 `;
 
 const Form = styled.form``;

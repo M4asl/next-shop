@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { deleteOrder } from "../../../redux/actions/orderActions";
 import { toast } from "react-toastify";
+import Loader from "../../Layout/Loader";
 
 const DeleteOrder = () => {
   const router = useRouter();
@@ -67,13 +68,14 @@ const DeleteOrder = () => {
                   CANCEL
                 </CancelButton>
                 <DeleteButton onClick={() => deleteOrderHandler()}>
-                  {loading ? "LOADING" : "DELETE"}
+                  DELETE
                 </DeleteButton>
               </ButtonContainer>
             </DeleteModalWrapper>
           </DeleteModalContainer>
         )}
       </AnimatePresence>
+      {loading && <Loader />}
     </ModalDeleteWrapper>
   );
 };

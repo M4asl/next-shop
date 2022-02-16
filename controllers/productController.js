@@ -44,7 +44,10 @@ const getProducts = catchAsync(async (req, res, next) => {
 });
 
 const getProductById = catchAsync(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.query.id).populate(
+    "reviews.user",
+    "_id email"
+  );
 
   if (!product) {
     return next(new AppError("Product not found.", 404));

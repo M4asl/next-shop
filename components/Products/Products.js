@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { addToCart } from "../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { IconContext } from "react-icons/lib";
+import Loader from "../Layout/Loader";
 
 const Products = ({ role }) => {
   const router = useRouter();
@@ -21,12 +22,20 @@ const Products = ({ role }) => {
   let { page = 1 } = query;
   page = Number(page);
 
-  const { productList, error } = useSelector((state) => state.productList);
+  const { productList, error, loading } = useSelector(
+    (state) => state.productList
+  );
   const { products, productsCount, resPerPage, filteredProductsCount } =
     productList;
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const handlePagination = (pageNumber) => {
     let link = "";
@@ -136,6 +145,7 @@ const Products = ({ role }) => {
           activeClass="page-item-active"
         />
       )}
+      {loading && <Loader />}
     </ProductsContainer>
   );
 };

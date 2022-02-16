@@ -11,42 +11,41 @@ import {
   USER_REGISTER_SUCCESS,
 } from "../constants/authConstants";
 
-const register =
-  (name, email, password, passwordConfirm) => async (dispatch) => {
-    try {
-      dispatch({
-        type: USER_REGISTER_REQUEST,
-      });
+const register = (email, password, passwordConfirm) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_REGISTER_REQUEST,
+    });
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-      const { data } = await axios.post(
-        "/api/auth/register",
-        { name, email, password, passwordConfirm },
-        config
-      );
+    const { data } = await axios.post(
+      "/api/auth/register",
+      { email, password, passwordConfirm },
+      config
+    );
 
-      dispatch({
-        type: USER_REGISTER_SUCCESS,
-        payload: data,
-      });
+    dispatch({
+      type: USER_REGISTER_SUCCESS,
+      payload: data,
+    });
 
-      Cookies.set("token", data.token, {
-        expires: 1,
-        path: "/",
-      });
-      window.location.href = "/";
-    } catch (error) {
-      dispatch({
-        type: USER_REGISTER_FAIL,
-        payload: error.response.data.error.errors,
-      });
-    }
-  };
+    Cookies.set("token", data.token, {
+      expires: 1,
+      path: "/",
+    });
+    window.location.href = "/";
+  } catch (error) {
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload: error.response.data.error.errors,
+    });
+  }
+};
 
 const login = (email, password) => async (dispatch) => {
   try {
@@ -86,11 +85,10 @@ const login = (email, password) => async (dispatch) => {
 
 const logout = () => async (dispatch) => {
   try {
-    console.log("hey");
     Cookies.remove("token");
+    Cookies.remove("role");
     await axios.get("/api/auth/logout");
     dispatch({ type: USER_LOGOUT });
-    // Router.push("/login");
     Router.push("/");
   } catch (err) {
     console.log(err);

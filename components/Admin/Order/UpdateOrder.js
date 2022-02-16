@@ -8,6 +8,8 @@ import {
   paymentOrderStatus,
   statusOrder,
 } from "../../../redux/actions/orderActions";
+import Loader from "../../Layout/Loader";
+import { toast } from "react-toastify";
 
 const UpdateOrder = () => {
   const ref = useRef();
@@ -34,7 +36,10 @@ const UpdateOrder = () => {
     if (success || successPaidStatus) {
       router.reload();
     }
-  }, [success, successPaidStatus]);
+    if (error || errorPaidStatus) {
+      toast.error(error || errorPaidStatus);
+    }
+  }, [success, successPaidStatus, error, errorPaidStatus]);
 
   useEffect(() => {
     const handleMouseClick = (e) => {
@@ -123,13 +128,14 @@ const UpdateOrder = () => {
                     CANCEL
                   </CancelButton>
 
-                  <UpdateButton>{loading ? "LOADING" : "Update"}</UpdateButton>
+                  <UpdateButton>UPDATE</UpdateButton>
                 </ButtonContainer>
               </Form>
             </UpdateModalWrapper>
           </UpdateModalContainer>
         )}
       </AnimatePresence>
+      {loading || (loadingPaidStatus && <Loader />)}
     </ModalUpdateWrapper>
   );
 };

@@ -7,6 +7,7 @@ import { createReviewProduct } from "../../redux/actions/productActions";
 import { toast } from "react-toastify";
 import { clearErrors } from "../../redux/actions/globalActions";
 import { IconContext } from "react-icons/lib";
+import Loader from "../Layout/Loader";
 
 const ReviewForm = () => {
   const router = useRouter();
@@ -21,6 +22,12 @@ const ReviewForm = () => {
   const { productDetails, loading, error } = useSelector(
     (state) => state.createProductReview
   );
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (error) {
@@ -91,6 +98,7 @@ const ReviewForm = () => {
           </Button>
         </FormGroup>
       </Form>
+      {loading && <Loader />}
     </>
   );
 };
@@ -101,6 +109,12 @@ const Form = styled.form`
   width: 1000px;
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    width: 100%;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    flex-direction: column;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -118,10 +132,16 @@ const Label = styled.label`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    justify-content: center;
+  }
 `;
 
 const TextCount = styled.p`
   color: ${({ theme }) => theme.text.primary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    margin-right: 20px;
+  }
 `;
 
 const TextArea = styled.textarea`

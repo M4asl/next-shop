@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
+import Loader from "../../Layout/Loader";
 
 const NewProduct = () => {
   const [name, setName] = useState("");
@@ -185,7 +186,7 @@ const NewProduct = () => {
             multiple
           />
         </FormGroupFile>
-        <Button>{loading ? "LOADING" : "Create"}</Button>
+        <Button>Create</Button>
       </FormContainer>
       <ImagesWrapper>
         {imagesPreview.map((img, i) => (
@@ -206,6 +207,7 @@ const NewProduct = () => {
           </div>
         ))}
       </ImagesWrapper>
+      {loading && <Loader />}
     </CreateProductWrapper>
   );
 };
@@ -214,6 +216,9 @@ const CreateProductWrapper = styled.div`
   width: 100%;
   padding: 75px;
   position: relative;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    padding: 50px 0px;
+  }
 `;
 
 const FormContainer = styled.form`
@@ -227,6 +232,10 @@ const FormContainer = styled.form`
   justify-content: space-evenly;
   border-radius: 30px;
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -235,6 +244,9 @@ const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const Label = styled.label`
@@ -248,6 +260,9 @@ const FormGroupFile = styled.div`
   margin: 10px;
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -263,6 +278,9 @@ const StyledInput = styled.input`
     border-radius: 20px;
     border: 2px solid ${({ theme }) => theme.text.secondary};
   }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -273,10 +291,16 @@ const TextArea = styled.textarea`
   border: 2px solid ${({ theme }) => theme.text.secondary};
   resize: none;
   background-color: white;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const StyledInputFile = styled.input`
   width: 300px;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const ImagesWrapper = styled.div`

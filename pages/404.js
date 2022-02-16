@@ -1,7 +1,7 @@
 import React from "react";
-
+import Error from "../components/Layout/Error";
 const ErrorPage = () => {
-  return <div>page not found</div>;
+  return <Error />;
 };
 
 export default ErrorPage;

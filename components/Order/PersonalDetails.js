@@ -5,6 +5,8 @@ import { lightTheme } from "../../styles/default";
 import Image from "next/image";
 import ButtonContainer from "./ButtonContainer";
 import { savePersonalDetails } from "../../redux/actions/cartActions";
+import { toast } from "react-toastify";
+import Loader from "../Layout/Loader";
 
 const PersonalDetails = ({ orderDetails, update, step, setStep, cookie }) => {
   const personalDetails = cookie?.personalDetails
@@ -12,7 +14,9 @@ const PersonalDetails = ({ orderDetails, update, step, setStep, cookie }) => {
     : {};
 
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.getCurrentUserDetails);
+  const { userInfo, error, loading } = useSelector(
+    (state) => state.getCurrentUserDetails
+  );
   const [values, setValues] = useState({
     email: "",
     firstName: "",
@@ -26,6 +30,12 @@ const PersonalDetails = ({ orderDetails, update, step, setStep, cookie }) => {
       lastName: orderDetails?.lastName || personalDetails?.lastName || "",
     });
   }, [userInfo]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const regExFirstNameAndLastName =
     /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -105,6 +115,7 @@ const PersonalDetails = ({ orderDetails, update, step, setStep, cookie }) => {
           className={"image"}
         />
       </ImageWrapper>
+      {loading && <Loader />}
     </PersonalDetailsWrapper>
   );
 };

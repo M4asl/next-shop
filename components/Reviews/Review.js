@@ -11,11 +11,11 @@ const ReviewList = ({ review }) => {
       <ReviewContainer>
         <LeftContainer>
           <Avatar>
-            <IconContext.Provider value={{ size: "20px" }}>
+            <IconContext.Provider value={{ size: "30px" }}>
               <HiOutlineUserCircle />
             </IconContext.Provider>
           </Avatar>
-          <ProfileName>Name</ProfileName>
+          <ProfileName>{review.user.email}</ProfileName>
         </LeftContainer>
         <RightContainer>
           <TopContainer>
@@ -44,6 +44,14 @@ const ReviewContainer = styled.div`
     border-bottom: 2px solid ${({ theme }) => theme.text.primary};
     margin-bottom: 100px;
   }
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    width: 100%;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0px;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -59,10 +67,16 @@ const Avatar = styled.div`
 
 const ProfileName = styled.div`
   font-size: 2rem;
+  overflow-wrap: break-word;
 `;
 
 const RightContainer = styled.div`
   width: 70%;
+  overflow-wrap: break-word;
+
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 100%;
+  }
 `;
 
 const TopContainer = styled.div`
@@ -70,6 +84,7 @@ const TopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 15px 0px;
+  align-items: center;
 `;
 
 const Time = styled.div``;

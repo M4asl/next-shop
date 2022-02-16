@@ -23,13 +23,11 @@ const Footer = () => {
   const isMobile = useMediaQuery("(max-width: 1024px)");
   return (
     <>
-      {!isMobile && (
-        <FooterWrapper>
-          <FooterInfo title={"About Us"} items={AboutUs} />
-          <FooterInfo title={"Our Services"} items={OurServices} />
-          <FooterInfo title={"Information"} items={Information} />
-        </FooterWrapper>
-      )}
+      <FooterWrapper>
+        <FooterInfo title={"About Us"} items={AboutUs} />
+        <FooterInfo title={"Our Services"} items={OurServices} />
+        <FooterInfo title={"Information"} items={Information} />
+      </FooterWrapper>
     </>
   );
 };
@@ -41,4 +39,8 @@ const FooterWrapper = styled.div`
   justify-content: space-around;
   padding: 20px;
   border-top: 2px solid ${({ theme }) => theme.text.primary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;

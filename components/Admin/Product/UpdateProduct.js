@@ -11,6 +11,7 @@ import {
   getProductDetails,
 } from "../../../redux/actions/productActions";
 import { IconContext } from "react-icons/lib";
+import Loader from "../../Layout/Loader";
 
 const UpdateProduct = ({ closeModalUpdate }) => {
   const {
@@ -123,7 +124,6 @@ const UpdateProduct = ({ closeModalUpdate }) => {
   return (
     <CreateProductWrapper>
       <FormContainer onSubmit={submitHandler}>
-        {loading && <h1>LOADING</h1>}
         <Title>Update product</Title>
         <div
           onClick={() => closeModalUpdate()}
@@ -237,6 +237,7 @@ const UpdateProduct = ({ closeModalUpdate }) => {
           ))}
         </ImagesWrapper>
       </FormContainer>
+      {(loading || productDetailsLoading) && <Loader />}
     </CreateProductWrapper>
   );
 };
@@ -247,6 +248,9 @@ const CreateProductWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h1`
@@ -255,16 +259,18 @@ const Title = styled.h1`
 
 const FormContainer = styled.form`
   width: 500px;
-  // height: 90%;
-  // overflow-y: scroll;
+  height: 100vh;
+  overflow: scroll;
   padding: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  // justify-content: space-between;
   border-radius: 30px;
   background-color: black;
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 300px;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -273,6 +279,9 @@ const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const Label = styled.label`
@@ -286,6 +295,9 @@ const FormGroupFile = styled.div`
   margin: 10px;
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -311,10 +323,16 @@ const TextArea = styled.textarea`
   border: 2px solid ${({ theme }) => theme.text.secondary};
   resize: none;
   background-color: white;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const StyledInputFile = styled.input`
   width: 300px;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 200px;
+  }
 `;
 
 const ImagesWrapper = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import styled from "styled-components";
@@ -22,20 +22,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import UpdateModal from "../../../components/Admin/Product/UpdateModal";
 import DeleteModal from "../../../components/Admin/Product/DeleteModal";
+import Loader from "../../../components/Layout/Loader";
 
 const Product = ({ token, role }) => {
-  if (process.browser) {
-    new Swiper(".swiper-logos");
-  }
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { productDetails, loading } = useSelector(
+  const { productDetails, loading, error } = useSelector(
     (state) => state.productDetails
   );
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
   const { _id, images, name, description, price } = productDetails;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const addToCartHandler = (id, qty = 1) => {
     if (cartItems.length > 12) {
@@ -122,6 +126,7 @@ const Product = ({ token, role }) => {
         <ProductDescription>{description}</ProductDescription>
       </ProductDetailsWrapper>
       <Reviews />
+      {loading && <Loader />}
     </>
   );
 };
@@ -134,6 +139,9 @@ const ProductDetailsWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    padding: 60px 0px 0px;
+  }
 `;
 
 const ProductDetailsTopWrapper = styled.div`
@@ -143,11 +151,26 @@ const ProductDetailsTopWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ImagesWrapper = styled.div`
   width: 500px;
   height: 500px;
+
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    width: 400px;
+    height: 400px;
+  }
+
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 300px;
+    height: 300px;
+  }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -232,6 +255,18 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    font-size: 1.5rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    font-size: 1.2rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 80%;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    font-size: 1rem;
+  }
 `;
 
 const ProductName = styled.h1`
@@ -245,6 +280,15 @@ const ProductDescription = styled.h3`
   font-size: 2.5rem;
   line-height: 2.5;
   font-weight: 500;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    line-height: 2;
+  }
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    font-size: 2rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 1.5rem;
+  }
 `;
 
 const CenterContainer = styled.div`
@@ -256,6 +300,12 @@ const CenterContainer = styled.div`
 
 const ProductPrice = styled.span`
   font-size: 3rem;
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    font-size: 2.5rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 2.2rem;
+  }
 `;
 
 const Button = styled.button`
@@ -266,11 +316,22 @@ const Button = styled.button`
   border-radius: 20px;
   background-color: white;
   border: 2px solid ${({ theme }) => theme.text.primary};
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    width: 140px;
+    padding: 5px 0px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    width: 120px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const UpdateButton = styled.button`

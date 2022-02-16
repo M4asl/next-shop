@@ -10,12 +10,22 @@ import { BsTrash } from "react-icons/bs";
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { IconContext } from "react-icons/lib";
+import { toast } from "react-toastify";
+import Loader from "../components/Layout/Loader";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userInfo } = useSelector((state) => state.getCurrentUserDetails);
+  const { userInfo, error, loading } = useSelector(
+    (state) => state.getCurrentUserDetails
+  );
   const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const checkoutHandler = () => {
     if (!userInfo) {
@@ -146,6 +156,7 @@ const Cart = () => {
           Proceed to Checkout
         </Button>
       </CartProductsCheckoutWrapper>
+      {loading && <Loader />}
     </CartWrapper>
   );
 };

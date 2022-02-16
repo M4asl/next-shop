@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import styled from "styled-components";
@@ -18,22 +18,24 @@ import "swiper/css/thumbs";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
+import Loader from "../Layout/Loader";
 
 const SingleProductDetails = () => {
-  // it have on deploy but it have to comment on dev mode
-
-  // if (process.browser) {
-  //   new Swiper(".swiper-logos");
-  // }
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { productDetails, loading } = useSelector(
+  const { productDetails, loading, error } = useSelector(
     (state) => state.productDetails
   );
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
   const { _id, images, name, description, price } = productDetails;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const addToCartHandler = (id, qty = 1) => {
     if (cartItems.length > 12) {
@@ -111,6 +113,7 @@ const SingleProductDetails = () => {
         <ProductDescription>{description}</ProductDescription>
       </ProductDetailsWrapper>
       <Reviews />
+      {loading && <Loader />}
     </>
   );
 };
@@ -121,20 +124,37 @@ const ProductDetailsWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    padding: 60px 0px 0px;
+  }
 `;
 
 const ProductDetailsTopWrapper = styled.div`
   width: 80%;
   height: 80%;
-  // padding: 75px 50px 0px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ImagesWrapper = styled.div`
   width: 500px;
   height: 500px;
+
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    width: 400px;
+    height: 400px;
+  }
+
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 300px;
+    height: 300px;
+  }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -219,6 +239,18 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    font-size: 1.5rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    font-size: 1.2rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 80%;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    font-size: 1rem;
+  }
 `;
 
 const ProductName = styled.h1`
@@ -232,6 +264,15 @@ const ProductDescription = styled.h3`
   font-size: 2.5rem;
   line-height: 2.5;
   font-weight: 500;
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    line-height: 2;
+  }
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    font-size: 2rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 1.5rem;
+  }
 `;
 
 const CenterContainer = styled.div`
@@ -243,38 +284,32 @@ const CenterContainer = styled.div`
 
 const ProductPrice = styled.span`
   font-size: 3rem;
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    font-size: 2.5rem;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 2.2rem;
+  }
 `;
 
 const Button = styled.button`
   width: 150px;
   padding: 10px 0px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.information.success};
   border-radius: 20px;
   background-color: white;
   border: 2px solid ${({ theme }) => theme.text.primary};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const UpdateButton = styled.button`
-  width: 180px;
-  height: 35px;
-  margin-top: 20px;
-  background: transparent;
-  color: ${({ theme }) => theme.text.secondary};
-  border: 2px solid ${({ theme }) => theme.text.secondary};
-`;
-const DeleteButton = styled.button`
-  width: 180px;
-  height: 35px;
-  margin-top: 20px;
-  background: transparent;
-  color: ${({ theme }) => theme.information.dangerous};
-  border: 2px solid ${({ theme }) => theme.information.dangerous};
+  @media only ${({ theme }) => theme.breakpoints.lg} {
+    width: 140px;
+    padding: 5px 0px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.md} {
+    width: 120px;
+  }
 `;
 
 export default SingleProductDetails;

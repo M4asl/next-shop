@@ -5,25 +5,22 @@ import { parseCookies } from "nookies";
 import styled from "styled-components";
 import { lightTheme } from "../styles/default";
 import { wrapper } from "../redux/store";
-import { login } from "../redux/actions/authActions";
+import { register } from "../redux/actions/authActions";
 import Loader from "../components/Layout/Loader";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
-const Login = () => {
+const Register = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
     email: "",
     password: "",
+    passwordConfirm: "",
   });
-  const { userInfo, loading, error } = useSelector((state) => state.userLogin);
-
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login(values.email, values.password));
-  };
+  const { loading, userInfo, error } = useSelector(
+    (state) => state.userRegister
+  );
 
   useEffect(() => {
     if (error) {
@@ -31,11 +28,19 @@ const Login = () => {
     }
   }, [error]);
 
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register(values.email, values.password, values.passwordConfirm));
+  };
+
   return (
-    <LoginWrapper>
+    <RegisterWrapper>
       <GlassCard>
         <FormContainer onSubmit={handleSubmit}>
-          <TextTitle>Sign in</TextTitle>
+          <TextTitle>Sign up</TextTitle>
           <FormGroup>
             <Label htmlFor="email_field">Email</Label>
             <StyledInput
@@ -57,24 +62,32 @@ const Login = () => {
               onChange={handleChange("password")}
             />
           </FormGroup>
-          <LinkContainer>
-            <Link href="/password/forgot">Forgot password?</Link>
-          </LinkContainer>
+
+          <FormGroup>
+            <Label htmlFor="password_confirm_field">Confirm password</Label>
+            <StyledInput
+              type="password"
+              placeholder="Confirm password"
+              id="password_confirm_field"
+              value={values.passwordConfirm}
+              onChange={handleChange("passwordConfirm")}
+            />
+          </FormGroup>
 
           <Button
-            id="login_button"
+            id="register_button"
             type="submit"
             disabled={loading ? true : false}
           >
-            LOGIN
+            REGISTER
           </Button>
           <LinkContainer>
-            <Link href="/register">Create acount</Link>
+            <Link href="/login">Already have an account?</Link>
           </LinkContainer>
         </FormContainer>
       </GlassCard>
       {loading && <Loader />}
-    </LoginWrapper>
+    </RegisterWrapper>
   );
 };
 
@@ -84,7 +97,7 @@ const LinkContainer = styled.span`
   }
 `;
 
-const LoginWrapper = styled.div`
+const RegisterWrapper = styled.div`
   width: 100%;
   height: 100vh;
 `;
@@ -121,7 +134,7 @@ const GlassCard = styled.div`
   }
   @media only ${lightTheme.breakpoints.xs} {
     width: 300px;
-    height: 400px;
+    height: 500px;
   }
 `;
 
@@ -212,4 +225,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
 );
 
-export default Login;
+export default Register;

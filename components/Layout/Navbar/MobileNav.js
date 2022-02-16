@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/actions/authActions";
 
 const itemVariants = {
   closed: {
@@ -15,20 +17,26 @@ const itemVariants = {
 const sideVariants = {
   closed: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: -1,
     },
   },
   open: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: 1,
     },
   },
 };
 
 const MobileNav = ({ links }) => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.getCurrentUserDetails);
+  const { cartItems } = useSelector((state) => state.cart);
   const [open, cycleOpen] = useCycle(false, true);
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <>
       <AnimatePresence>
@@ -61,6 +69,36 @@ const MobileNav = ({ links }) => {
                     <Link href={item.url}>{item.text}</Link>
                   </motion.li>
                 ))}
+                <motion.li variants={itemVariants} onClick={cycleOpen}>
+                  <Link href="/orders/my">Orders</Link>
+                </motion.li>
+                {userInfo.role === "admin" && (
+                  <>
+                    <motion.li variants={itemVariants} onClick={cycleOpen}>
+                      <Link href="/admin/products">Products Admin</Link>
+                    </motion.li>
+                    <motion.li variants={itemVariants} onClick={cycleOpen}>
+                      <Link href="/admin/orders">Orders Admin</Link>
+                    </motion.li>
+                    <motion.li variants={itemVariants} onClick={cycleOpen}>
+                      <Link href="/admin/products/new">Create Product</Link>
+                    </motion.li>
+                  </>
+                )}
+                {userInfo && (
+                  <motion.li variants={itemVariants} onClick={logoutHandler}>
+                    <Link href="/">Logout</Link>
+                  </motion.li>
+                )}
+                <motion.li
+                  variants={itemVariants}
+                  onClick={cycleOpen}
+                  style={{ position: "relative" }}
+                  className="link"
+                >
+                  <Dot>{cartItems.length}</Dot>
+                  <Link href="/cart">cart</Link>
+                </motion.li>
               </MenuList>
             </Container>
           </Aside>
@@ -119,4 +157,13 @@ const Button = styled(motion.button)`
   // margin: 1.25rem;
   padding: 1rem 1rem;
   color: ${({ theme }) => theme.text.primary};
+`;
+
+const Dot = styled.span`
+  position: absolute;
+  top: 2%;
+  left: 66%;
+  padding: 2px 6px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.information.warning};
 `;

@@ -1,9 +1,11 @@
 import { parseCookies } from "nookies";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import DeleteOrder from "../../../components/Admin/Order/DeleteOrder";
 import UpdateOrder from "../../../components/Admin/Order/UpdateOrder";
+import Loader from "../../../components/Layout/Loader";
 import OrderDetails from "../../../components/Order/OrderDetails";
 import { getOrderDetails } from "../../../redux/actions/orderActions";
 import { wrapper } from "../../../redux/store";
@@ -11,6 +13,13 @@ import { wrapper } from "../../../redux/store";
 const AdminOrderDetails = ({ role }) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   return (
     <>
       <OrderDetails orderData={order} />
@@ -24,6 +33,7 @@ const AdminOrderDetails = ({ role }) => {
           </DeleteButton>
         </ButtonContainer>
       )}
+      {loading && <Loader />}
     </>
   );
 };

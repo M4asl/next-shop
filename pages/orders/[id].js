@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { wrapper } from "../../redux/store";
 import { parseCookies } from "nookies";
 import { getOrderDetails } from "../../redux/actions/orderActions";
 import { useSelector } from "react-redux";
 import OrderDetails from "../../components/Order/OrderDetails";
+import Loader from "../../components/Layout/Loader";
+import { toast } from "react-toastify";
 
 const Order = ({ role }) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
   return (
     <>
       <OrderDetails orderData={order} roleType={role} />
+      {loading && <Loader />}
     </>
   );
 };

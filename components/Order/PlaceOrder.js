@@ -7,13 +7,14 @@ import { createOrder } from "../../redux/actions/orderActions";
 import OrderSummaryPrice from "./OrderSummaryPrice";
 import OrderSummaryDetails from "./OrderSummaryDetails";
 import { toast } from "react-toastify";
+import Loader from "../Layout/Loader";
 
 const PlaceOrder = ({ orderDetails, update, step, setStep, cookie }) => {
   const dispatch = useDispatch();
   const cartItems = cookie?.cartItems ? JSON.parse(cookie?.cartItems) : {};
   const router = useRouter();
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, success, error } = orderCreate;
+  const { order, success, error, loading } = orderCreate;
   const {
     email,
     firstName,
@@ -115,6 +116,7 @@ const PlaceOrder = ({ orderDetails, update, step, setStep, cookie }) => {
           />
         </OrderSummaryWrapper>
       </PlaceOrderRightSide>
+      {loading && <Loader />}
     </PlaceOrderWrapper>
   );
 };
