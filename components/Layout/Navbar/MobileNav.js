@@ -72,7 +72,7 @@ const MobileNav = ({ links }) => {
                 <motion.li variants={itemVariants} onClick={cycleOpen}>
                   <Link href="/orders/my">Orders</Link>
                 </motion.li>
-                {userInfo.role === "admin" && (
+                {userInfo?.role === "admin" && (
                   <>
                     <motion.li variants={itemVariants} onClick={cycleOpen}>
                       <Link href="/admin/products">Products Admin</Link>
