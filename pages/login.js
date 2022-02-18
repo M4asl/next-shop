@@ -66,14 +66,13 @@ const Login = () => {
             type="submit"
             disabled={loading ? true : false}
           >
-            LOGIN
+            {loading ? <Loader /> : "LOGIN"}
           </Button>
           <LinkContainer>
             <Link href="/register">Create acount</Link>
           </LinkContainer>
         </FormContainer>
       </GlassCard>
-      {loading && <Loader />}
     </LoginWrapper>
   );
 };
@@ -178,8 +177,8 @@ const FormGroup = styled.div`
 
 const Button = styled.button`
   width: 180px;
-  height: 35px;
-  margin-top: 20px;
+  min-height: 35px;
+  margin: 20px 0px;
   background: transparent;
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
@@ -188,7 +187,7 @@ const Button = styled.button`
   }
   @media only ${({ theme }) => theme.breakpoints.xs} {
     width: 80px;
-    height: 30px;
+    min-height: 30px;
     font-size: 1rem;
   }
 `;

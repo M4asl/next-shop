@@ -29,7 +29,8 @@ const SingleProductDetails = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const { _id, images, name, description, price } = productDetails;
+  const { _id, images, name, description, price, countInStock } =
+    productDetails;
 
   useEffect(() => {
     if (error) {
@@ -101,12 +102,17 @@ const SingleProductDetails = () => {
             <ProductName>{name}</ProductName>
             <CenterContainer>
               <ProductPrice>{price}$</ProductPrice>
-              <Button onClick={() => addToCartHandler(_id)}>
-                Add to cart
-                <IconContext.Provider value={{ size: "20px" }}>
-                  <BsCartPlus />
-                </IconContext.Provider>
-              </Button>
+
+              {countInStock > 0 ? (
+                <Button onClick={() => addToCartHandler(_id)}>
+                  Add to cart
+                  <IconContext.Provider value={{ size: "20px" }}>
+                    <BsCartPlus />
+                  </IconContext.Provider>
+                </Button>
+              ) : (
+                <ButtonDisabled disabled>Out of stock</ButtonDisabled>
+              )}
             </CenterContainer>
           </InfoWrapper>
         </ProductDetailsTopWrapper>
@@ -309,6 +315,23 @@ const Button = styled.button`
   }
   @media only ${({ theme }) => theme.breakpoints.md} {
     width: 120px;
+  }
+`;
+
+const ButtonDisabled = styled.button`
+  width: 125px;
+  padding: 8px 2px;
+  border-radius: 20px;
+  background: transparent;
+  color: grey;
+  border: 2px solid grey;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 80px;
+    font-size: 1rem;
+    height: 30px;
   }
 `;
 

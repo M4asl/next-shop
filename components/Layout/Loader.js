@@ -12,57 +12,49 @@ const Loader = () => {
 export default Loader;
 
 const LoaderWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 999;
-  background: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .loader,
-  .loader:after {
-    border-radius: 50%;
-    width: 10em;
-    height: 10em;
-  }
+  top: 0%;
+  left: 0%;
+  position: relative;
+  padding: 2px;
   .loader {
-    margin: 60px auto;
-    font-size: 10px;
     position: relative;
-    text-indent: -9999em;
-    border-top: 1.1em solid rgba(255, 255, 255, 0.2);
-    border-right: 1.1em solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
-    border-left: 1.1em solid #ffffff;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: load8 1.1s infinite linear;
-    animation: load8 1.1s infinite linear;
+    top: 50%;
+    left: 50%;
+    height: 20px;
+    width: 20px;
+    margin: -10px 0 0 -10px;
+    transform: translate(-50%, -50%);
+    border: 4px rgba(0, 0, 0, 0.25) solid;
+    border-top: 4px ${({ theme }) => theme.text.primary} solid;
+    border-radius: 50%;
+    -webkit-animation: spin2 1s infinite linear;
+    animation: spin2 1s infinite linear;
   }
-  @-webkit-keyframes load8 {
-    0% {
+
+  @-webkit-keyframes spin2 {
+    from {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
+    to {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
     }
   }
-  @keyframes load8 {
-    0% {
+  @keyframes spin2 {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
+    to {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
     }
   }
 `;

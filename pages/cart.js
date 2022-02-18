@@ -172,7 +172,7 @@ const CartWrapper = styled.div`
   margin-bottom: 100px;
   @media only ${({ theme }) => theme.breakpoints.sm} {
     padding: 30px 2px 0px;
-    height: 50vh;
+    min-height: 50vh;
   }
 `;
 const CartTitle = styled.h1`

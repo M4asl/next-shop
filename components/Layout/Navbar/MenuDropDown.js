@@ -54,7 +54,7 @@ const DropDownContainer = styled(motion.div)`
   width: 250px;
   position: absolute;
   top: 100%;
-  left: 83%;
+  left: -48%;
   text-align: center;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);

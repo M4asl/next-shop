@@ -43,10 +43,9 @@ const DeleteProduct = ({
       <ButtonContainer>
         <CancelButton onClick={() => closeModalDelete()}>CANCEL</CancelButton>
         <DeleteButton onClick={() => deleteProductHandler()}>
-          DELETE
+          {loading || productDetailsLoading ? <Loader /> : "DELETE"}
         </DeleteButton>
       </ButtonContainer>
-      {(loading || productDetailsLoading) && <Loader />}
     </ModalWrapper>
   );
 };
@@ -65,6 +64,9 @@ const Title = styled.h3`
   font-size: 2rem;
   font-weight: 700;
   color: ${({ theme }) => theme.text.primary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 1.5rem;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -80,6 +82,9 @@ const CancelButton = styled.button`
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;
 const DeleteButton = styled.button`
   width: 180px;
@@ -89,4 +94,7 @@ const DeleteButton = styled.button`
   color: ${({ theme }) => theme.information.dangerous};
   border: 2px solid ${({ theme }) => theme.information.dangerous};
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;

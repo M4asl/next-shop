@@ -19,7 +19,7 @@ const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };

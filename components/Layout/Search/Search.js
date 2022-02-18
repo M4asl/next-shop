@@ -3,11 +3,13 @@ import styled from "styled-components";
 import SearchDropDown from "./SerchDropDown";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 
 const Search = () => {
   const ref = useRef();
   const searchRef = useRef();
   const [show, setShow] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 1024px)");
 
   const closeDropdown = () => {
     setShow(false);
@@ -29,7 +31,7 @@ const Search = () => {
 
   return (
     <SearchWrapper ref={ref} onClick={() => setShow(true)}>
-      <span>Search Products</span>
+      {!isMobile && <span>Search Products</span>}
       <IconContext.Provider value={{ size: "20px" }}>
         <AiOutlineSearch />
       </IconContext.Provider>

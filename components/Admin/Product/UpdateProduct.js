@@ -125,20 +125,11 @@ const UpdateProduct = ({ closeModalUpdate }) => {
     <CreateProductWrapper>
       <FormContainer onSubmit={submitHandler}>
         <Title>Update product</Title>
-        <div
-          onClick={() => closeModalUpdate()}
-          style={{
-            color: "white",
-            top: "1%",
-            left: "89%",
-            fontSize: "4rem",
-            position: "absolute",
-          }}
-        >
+        <CloseModalButton onClick={() => closeModalUpdate()}>
           <IconContext.Provider value={{ size: "20px" }}>
             <AiOutlineClose />
           </IconContext.Provider>
-        </div>
+        </CloseModalButton>
         <FormGroup>
           <Label htmlFor="name_field">Name</Label>
           <StyledInput
@@ -216,7 +207,9 @@ const UpdateProduct = ({ closeModalUpdate }) => {
             multiple
           />
         </FormGroupFile>
-        <Button>{loading ? "LOADING" : "Update"}</Button>
+        <Button>
+          {loading || productDetailsLoading ? <Loader /> : "Update"}
+        </Button>
         <ImagesWrapper>
           {imagesPreview.map((img, i) => (
             <ImageWrapper key={i}>
@@ -237,17 +230,13 @@ const UpdateProduct = ({ closeModalUpdate }) => {
           ))}
         </ImagesWrapper>
       </FormContainer>
-      {(loading || productDetailsLoading) && <Loader />}
     </CreateProductWrapper>
   );
 };
 
 const CreateProductWrapper = styled.div`
-  width: 500px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
   @media only ${({ theme }) => theme.breakpoints.sm} {
     width: 100%;
   }
@@ -260,16 +249,29 @@ const Title = styled.h1`
 const FormContainer = styled.form`
   width: 500px;
   height: 100vh;
-  overflow: scroll;
+  position: relative;
+  overflow-y: scroll;
   padding: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: black;
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 100%;
+    border-radius: 0px;
+  }
+`;
+
+const CloseModalButton = styled.div`
+  color: white;
+  top: 0%;
+  left: 92%;
+  position: absolute;
+  font-size: 4rem;
   @media only ${({ theme }) => theme.breakpoints.sm} {
-    width: 300px;
+    font-size: 3rem;
   }
 `;
 
@@ -337,7 +339,7 @@ const StyledInputFile = styled.input`
 
 const ImagesWrapper = styled.div`
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   overflow-y: scroll;
   margin: 0 auto;
   margin-top: 30px;
@@ -354,7 +356,7 @@ const ImageWrapper = styled.div`
 
 const Button = styled.button`
   width: 180px;
-  height: 40px;
+  min-height: 35px;
   background: transparent;
   border: 2px solid ${({ theme }) => theme.text.secondary};
   display: flex;

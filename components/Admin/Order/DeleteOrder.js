@@ -68,14 +68,13 @@ const DeleteOrder = () => {
                   CANCEL
                 </CancelButton>
                 <DeleteButton onClick={() => deleteOrderHandler()}>
-                  DELETE
+                  {loading ? <Loader /> : "DELETE"}
                 </DeleteButton>
               </ButtonContainer>
             </DeleteModalWrapper>
           </DeleteModalContainer>
         )}
       </AnimatePresence>
-      {loading && <Loader />}
     </ModalDeleteWrapper>
   );
 };
@@ -100,6 +99,10 @@ const DeleteModalContainer = styled(motion.div)`
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 300px;
+    height: 150px;
+  }
 `;
 
 const DeleteModalWrapper = styled.div`
@@ -115,6 +118,9 @@ const Title = styled.h3`
   font-size: 2rem;
   font-weight: 700;
   color: ${({ theme }) => theme.text.primary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 1.5rem;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -131,6 +137,9 @@ const CancelButton = styled.button`
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;
 
 const DeleteButton = styled.button`
@@ -141,4 +150,7 @@ const DeleteButton = styled.button`
   color: ${({ theme }) => theme.information.dangerous};
   border: 2px solid ${({ theme }) => theme.information.dangerous};
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;

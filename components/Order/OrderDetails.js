@@ -84,6 +84,9 @@ const Button = styled.button`
   height: 35px;
   background: transparent;
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  svg {
+    color: ${({ theme }) => theme.text.secondary} !important;
+  }
   display: flex;
   justify-content: center;
   align-items: center;

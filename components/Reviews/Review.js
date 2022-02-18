@@ -15,7 +15,7 @@ const ReviewList = ({ review }) => {
               <HiOutlineUserCircle />
             </IconContext.Provider>
           </Avatar>
-          <ProfileName>{review.user.email}</ProfileName>
+          <ProfileName>{review?.user?.email}</ProfileName>
         </LeftContainer>
         <RightContainer>
           <TopContainer>

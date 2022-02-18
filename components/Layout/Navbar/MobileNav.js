@@ -86,7 +86,13 @@ const MobileNav = ({ links }) => {
                   </>
                 )}
                 {userInfo && (
-                  <motion.li variants={itemVariants} onClick={logoutHandler}>
+                  <motion.li
+                    variants={itemVariants}
+                    onClick={() => {
+                      logoutHandler();
+                      cycleOpen();
+                    }}
+                  >
                     <Link href="/">Logout</Link>
                   </motion.li>
                 )}

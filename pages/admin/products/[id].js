@@ -33,7 +33,8 @@ const Product = ({ token, role }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const { _id, images, name, description, price } = productDetails;
+  const { _id, images, name, description, price, countInStock } =
+    productDetails;
 
   useEffect(() => {
     if (error) {
@@ -104,12 +105,16 @@ const Product = ({ token, role }) => {
             <ProductName>{name}</ProductName>
             <CenterContainer>
               <ProductPrice>{price}$</ProductPrice>
-              <Button onClick={() => addToCartHandler(_id)}>
-                Add to cart
-                <IconContext.Provider value={{ size: "20px" }}>
-                  <BsCartPlus />
-                </IconContext.Provider>
-              </Button>
+              {countInStock > 0 ? (
+                <Button onClick={() => addToCartHandler(_id)}>
+                  Add to cart
+                  <IconContext.Provider value={{ size: "20px" }}>
+                    <BsCartPlus />
+                  </IconContext.Provider>
+                </Button>
+              ) : (
+                <ButtonDisabled disabled>Out of stock</ButtonDisabled>
+              )}
             </CenterContainer>
             {token && role === "admin" && (
               <ButtonContainer>
@@ -315,6 +320,9 @@ const Button = styled.button`
   color: ${({ theme }) => theme.information.success};
   border-radius: 20px;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid ${({ theme }) => theme.text.primary};
   @media only ${({ theme }) => theme.breakpoints.lg} {
     width: 140px;
@@ -322,6 +330,23 @@ const Button = styled.button`
   }
   @media only ${({ theme }) => theme.breakpoints.md} {
     width: 120px;
+  }
+`;
+
+const ButtonDisabled = styled.button`
+  width: 125px;
+  padding: 8px 2px;
+  border-radius: 20px;
+  background: transparent;
+  color: grey;
+  border: 2px solid grey;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 80px;
+    font-size: 1rem;
+    height: 30px;
   }
 `;
 

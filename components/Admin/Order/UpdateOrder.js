@@ -128,14 +128,15 @@ const UpdateOrder = () => {
                     CANCEL
                   </CancelButton>
 
-                  <UpdateButton>UPDATE</UpdateButton>
+                  <UpdateButton>
+                    {loading || loadingPaidStatus ? <Loader /> : "UPDATE"}
+                  </UpdateButton>
                 </ButtonContainer>
               </Form>
             </UpdateModalWrapper>
           </UpdateModalContainer>
         )}
       </AnimatePresence>
-      {loading || (loadingPaidStatus && <Loader />)}
     </ModalUpdateWrapper>
   );
 };
@@ -160,6 +161,10 @@ const UpdateModalContainer = styled(motion.div)`
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 300px;
+    height: 200px;
+  }
 `;
 
 const UpdateModalWrapper = styled.div`
@@ -189,6 +194,9 @@ const FormGroup = styled.div`
 const Label = styled.label`
   font-size: 2rem;
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    font-size: 1.5rem;
+  }
 `;
 
 const Select = styled.select`
@@ -221,13 +229,19 @@ const CancelButton = styled.button`
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
   font-weight: 700;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;
 
 const UpdateButton = styled.button`
   width: 180px;
-  height: 40px;
+  height: 35px;
   margin-top: 20px;
   background: transparent;
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;

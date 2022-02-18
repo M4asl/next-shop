@@ -80,17 +80,13 @@ const Navbar = () => {
             </>
           ) : (
             <li>
-              <Link href="/login">Login</Link>
+              <Link href="/login">{loading ? <Loader /> : "Login"}</Link>
             </li>
           )}
         </ul>
+        {isMobile && <Search />}
       </RightSideWrapper>
       {isMobile && <MobileNav links={menuListItem} />}
-      {loading && (
-        <LoaderWrapper>
-          <Loader />
-        </LoaderWrapper>
-      )}
     </Navigation>
   );
 };
@@ -98,8 +94,10 @@ const Navbar = () => {
 export default Navbar;
 
 const Navigation = styled.nav`
-  width: 100%;
   position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
   z-index: 100;
   display: flex;
   justify-content: space-between;
@@ -164,7 +162,11 @@ const LeftSideWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-const RightSideWrapper = styled.div``;
+const RightSideWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const Dot = styled.span`
   position: absolute;

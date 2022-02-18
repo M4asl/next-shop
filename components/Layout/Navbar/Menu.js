@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import MenuDropDown from "./MenuDropDown";
 
 const Menu = ({ userInfo }) => {
   const ref = useRef();
   const userInfoRef = useRef();
   const [show, setShow] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 1024px)");
 
   const closeDropdown = () => {
     setShow(false);
@@ -28,15 +30,19 @@ const Menu = ({ userInfo }) => {
   return (
     <UserInfoWrapper ref={ref} onClick={() => setShow(true)}>
       <span>{userInfo.email}</span>
-      <MenuDropDown
-        show={show}
-        userInfoRef={userInfoRef}
-        closeDropdown={closeDropdown}
-      />
+      {!isMobile && (
+        <MenuDropDown
+          show={show}
+          userInfoRef={userInfoRef}
+          closeDropdown={closeDropdown}
+        />
+      )}
     </UserInfoWrapper>
   );
 };
 
 export default Menu;
 
-const UserInfoWrapper = styled.div``;
+const UserInfoWrapper = styled.div`
+  position: relative;
+`;

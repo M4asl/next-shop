@@ -30,6 +30,8 @@ const NewProduct = () => {
     (state) => state.createProduct
   );
 
+  toast.configure();
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -60,7 +62,6 @@ const NewProduct = () => {
     if (images.length === 0) return toast.error("Please upload images.");
 
     if (images.length > 5) return toast.error("Max length images is 5.");
-    console.log(productData);
     dispatch(createProduct(productData));
   };
 
@@ -186,7 +187,7 @@ const NewProduct = () => {
             multiple
           />
         </FormGroupFile>
-        <Button>Create</Button>
+        <Button type="submit">{loading ? <Loader /> : "CREATE"}</Button>
       </FormContainer>
       <ImagesWrapper>
         {imagesPreview.map((img, i) => (
@@ -207,7 +208,6 @@ const NewProduct = () => {
           </div>
         ))}
       </ImagesWrapper>
-      {loading && <Loader />}
     </CreateProductWrapper>
   );
 };
@@ -304,9 +304,10 @@ const StyledInputFile = styled.input`
 `;
 
 const ImagesWrapper = styled.div`
-  width: 500px;
+  max-height: 300px;
   margin: 0 auto;
   margin-top: 30px;
+  overflow-y: scroll;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;

@@ -128,6 +128,24 @@ const deleteOrder = catchAsync(async (req, res) => {
   });
 });
 
+const decreaseQuantity = catchAsync(async (req, res, next) => {
+  const updateProducts = async () => {
+    return Promise.all(
+      req.body.orderItems.map(async (item) => {
+        await Product.findByIdAndUpdate(
+          item.product,
+          { $inc: { countInStock: -item.qty } },
+          { new: true }
+        ).exec();
+      })
+    );
+  };
+
+  updateProducts();
+
+  next();
+});
+
 export {
   addOrderItems,
   getOrderById,
@@ -138,4 +156,5 @@ export {
   getOrders,
   getConfigPaypal,
   deleteOrder,
+  decreaseQuantity,
 };

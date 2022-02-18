@@ -97,7 +97,7 @@ const getProductDetails = (req, id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };
@@ -125,7 +125,7 @@ const getLastestProducts = (req) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_LIST_LASTEST_FAIL,
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };
@@ -153,7 +153,7 @@ const getTopRatedProducts = (req) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_LIST_TOP_RATED_FAIL,
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };

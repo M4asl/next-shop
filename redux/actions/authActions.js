@@ -42,7 +42,7 @@ const register = (email, password, passwordConfirm) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload: error.response.data.error.errors,
+      payload: error.response.data.message,
     });
   }
 };

@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Loader from "../Layout/Loader";
 
 const ButtonContainer = ({
   step,
@@ -8,6 +10,7 @@ const ButtonContainer = ({
   disabled,
   placeOrderHandler,
 }) => {
+  const { loading } = useSelector((state) => state.orderCreate);
   return (
     <ButtonWrapper
       style={
@@ -28,7 +31,7 @@ const ButtonContainer = ({
         ))}
       {step === 4 && (
         <Button type="submit" onClick={placeOrderHandler}>
-          Place order
+          {loading ? <Loader /> : "Place order"}
         </Button>
       )}
     </ButtonWrapper>

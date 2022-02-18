@@ -80,6 +80,12 @@ const SearchContainer = styled(motion.div)`
   width: 300px;
   position: absolute;
   top: 100%;
+  svg {
+    color: ${({ theme }) => theme.text.primary};
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    left: 0%;
+  }
 `;
 
 const LoaderWrapper = styled.div`
@@ -107,5 +113,9 @@ const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.text.secondary};
   &::placeholder {
     color: black;
+  }
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 100%;
+    height: 45px;
   }
 `;

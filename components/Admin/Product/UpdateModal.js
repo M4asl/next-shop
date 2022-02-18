@@ -54,7 +54,7 @@ const UpdateModalWrapper = styled.div`
   width: 500px;
   height: 100%;
   margin: 0 auto;
-  @media only ${({ theme }) => theme.breakpoints.sm} {
-    width: 300px;
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 100%;
   }
 `;

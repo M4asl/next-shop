@@ -45,6 +45,11 @@ const ButtonContainer = styled.div`
   margin-left: 75px;
   margin-bottom: 75px;
   padding-right: 90px;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 90%;
+    margin: 20px auto;
+    padding: 0%;
+  }
 `;
 
 const UpdateButton = styled.button`
@@ -54,6 +59,9 @@ const UpdateButton = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;
 const DeleteButton = styled.button`
   width: 180px;
@@ -62,6 +70,9 @@ const DeleteButton = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.information.dangerous};
   border: 2px solid ${({ theme }) => theme.information.dangerous};
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
 `;
 
 export default AdminOrderDetails;

@@ -79,14 +79,13 @@ const Register = () => {
             type="submit"
             disabled={loading ? true : false}
           >
-            REGISTER
+            {loading ? <Loader /> : "REGISTER"}
           </Button>
           <LinkContainer>
             <Link href="/login">Already have an account?</Link>
           </LinkContainer>
         </FormContainer>
       </GlassCard>
-      {loading && <Loader />}
     </RegisterWrapper>
   );
 };
@@ -192,7 +191,7 @@ const FormGroup = styled.div`
 const Button = styled.button`
   width: 180px;
   height: 35px;
-  margin-top: 20px;
+  margin: 20px 0px;
   background: transparent;
   color: ${({ theme }) => theme.text.secondary};
   border: 2px solid ${({ theme }) => theme.text.secondary};

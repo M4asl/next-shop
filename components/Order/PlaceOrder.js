@@ -14,7 +14,7 @@ const PlaceOrder = ({ orderDetails, update, step, setStep, cookie }) => {
   const cartItems = cookie?.cartItems ? JSON.parse(cookie?.cartItems) : {};
   const router = useRouter();
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, success, error, loading } = orderCreate;
+  const { order, success, error } = orderCreate;
   const {
     email,
     firstName,
@@ -116,7 +116,6 @@ const PlaceOrder = ({ orderDetails, update, step, setStep, cookie }) => {
           />
         </OrderSummaryWrapper>
       </PlaceOrderRightSide>
-      {loading && <Loader />}
     </PlaceOrderWrapper>
   );
 };

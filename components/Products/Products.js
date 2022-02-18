@@ -117,12 +117,17 @@ const Products = ({ role }) => {
               </ImageContainer>
               <BottomContainer>
                 <ProductPrice>{product.price}$</ProductPrice>
-                <Button onClick={() => addToCartHandler(product._id)}>
-                  Add to cart
-                  <IconContext.Provider value={{ size: "20px" }}>
-                    <BsCartPlus />
-                  </IconContext.Provider>
-                </Button>
+
+                {product.countInStock > 0 ? (
+                  <Button onClick={() => addToCartHandler(product._id)}>
+                    Add to cart
+                    <IconContext.Provider value={{ size: "20px" }}>
+                      <BsCartPlus />
+                    </IconContext.Provider>
+                  </Button>
+                ) : (
+                  <ButtonDisabled disabled>Out of stock</ButtonDisabled>
+                )}
               </BottomContainer>
             </Product>
           ))
@@ -261,8 +266,28 @@ const Button = styled.button`
   width: 125px;
   padding: 8px 2px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.information.success};
   border-radius: 20px;
   background-color: white;
   border: 2px solid ${({ theme }) => theme.text.primary};
+`;
+
+const ButtonDisabled = styled.button`
+  width: 125px;
+  padding: 8px 2px;
+  border-radius: 20px;
+  background: transparent;
+  color: grey;
+  border: 2px solid grey;
+  @media only ${({ theme }) => theme.breakpoints.sm} {
+    width: 120px;
+  }
+  @media only ${({ theme }) => theme.breakpoints.xs} {
+    width: 80px;
+    font-size: 1rem;
+    height: 30px;
+  }
 `;
