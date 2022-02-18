@@ -91,7 +91,7 @@ const Simple = ({ title, productsData }) => {
               <PriceContainer>{product.price}$</PriceContainer>
 
               {product.countInStock > 0 ? (
-                <Button onClick={() => addToCartHandler(_id)}>
+                <Button onClick={() => addToCartHandler(product._id)}>
                   Add to cart
                   <IconContext.Provider value={{ size: "20px" }}>
                     <BsCartPlus />
